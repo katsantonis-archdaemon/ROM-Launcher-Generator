@@ -17,23 +17,14 @@ Emulator frontends and custom launchers (Steam's "Add a Non-Steam Game," Hydra L
 - **Skips existing launchers** — re-running after adding new ROMs only creates what's missing, never overwrites
 - **Cleans up launcher names** — strips region/language/version tags like `(USA)`, `(En,Fr,Es)`, `[!]`, `(Rev 1)` from filenames
 - **Multi-disc grouping** — `.cue`/`.bin`, `.gdi`, and similarly paired files collapse into a single launcher per game instead of one per file; `(Disc 1)` / `(Disc 2)` naming is recognized too
-- **PS1 `.m3u` playlist organizing** — for the `ps1` folder specifically, any game with multiple disc files gets its files moved into a `multi/` subfolder and a matching `.m3u` playlist written next to it, so emulators that support disc-swapping (e.g. Azahar, DuckStation) can use it directly. Already-organized games are left alone on re-scan.
+- **PS1 `.m3u` playlist organizing** — for the `ps1` folder specifically, any game with multiple disc files gets its files moved into a `multi/` subfolder and a matching `.m3u` playlist written next to it, so emulators that support disc-swapping (e.g. Duckstation, PCSX2) can use it directly. Already-organized games are left alone on re-scan.
 - **Optional SteamGridDB artwork fetching** — pulls grid, hero, logo, and icon art per game automatically, with a review screen to manually swap any auto-picked image for one of several alternatives
 - **Preview / verification pass** — checks that every launcher generated this session actually points at files that still exist, and that every `.m3u` this session created is valid, flagging anything broken with a reason
 - Dark, themed UI with a live debug console alongside it for troubleshooting
 
-## Requirements
-
-- Windows 10/11
-- PowerShell 5.1 or later (included with Windows by default — nothing to install)
-- A [SteamGridDB](https://www.steamgriddb.com/profile/preferences/api) API key, only if you want automatic artwork
-
 ## Setup
 
-1. Download `ROM-Launcher-Generator-GUI.ps1` and `Run-ROM-Launcher-Generator.bat` and place them in the same folder.
-2. Double-click `Run-ROM-Launcher-Generator.bat`.
-
-Run the `.bat` file, not the `.ps1` directly — it unblocks the script (so Windows doesn't flag it as an untrusted download) and launches it with the right execution policy for that one run, without changing any system-wide PowerShell settings. A console window stays open alongside the GUI showing live debug output, which is useful if something doesn't behave as expected.
+Download the latest release, extract it and run the `.bat` file, not the `.ps1` directly — it unblocks the script (so Windows doesn't flag it as an untrusted download) and launches it with the right execution policy for that one run, without changing any system-wide PowerShell settings. A console window stays open alongside the GUI showing live debug output, which is useful if something doesn't behave as expected.
 
 ## Usage
 
@@ -87,11 +78,7 @@ Folder names are matched case-insensitively. Any other folder name is still scan
 
 ## Notes & limitations
 
-- Windows/PowerShell + WPF only; there's no cross-platform version.
+- Windows/PowerShell + WPF only; there's no cross-platform version YET.
 - The PS1 `.m3u` organizer **moves files** (not copies) into a `multi/` subfolder. It skips any game that already has a matching `.m3u`, so re-scanning an already-organized library is safe, but it's worth trying on a small folder first if you're cautious.
 - SteamGridDB artwork matching is by cleaned-up game title; obscure titles or ROM hacks may not find a match.
 - This was built and reviewed carefully, but only tested by hand on a real Windows machine as it was built — not covered by automated tests. If you hit a bug, please open an issue with what you were doing and, if possible, the debug console's output.
-
-## License
-
-MIT — do whatever you want with it.
